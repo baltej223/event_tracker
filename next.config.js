@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-//  output: 'export',
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
+  images: { 
+    unoptimized: true,
+    domains: ['images.pexels.com'] // If you add any external images later
+  },
+  // Optimize for Vercel
+  experimental: {
+    serverComponentsExternalPackages: ['mongoose'],
+  },
 };
 
 module.exports = nextConfig;
