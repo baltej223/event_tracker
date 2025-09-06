@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import Event from '@/lib/models/Event';
+import { ObjectId } from "mongodb";
 
 export const dynamic = "force-dynamic"; 
 
@@ -17,7 +18,7 @@ export async function GET() {
       success: true, 
       data: events.map(event => ({
         ...event,
-        _id: event._id.toString(),
+        _id: (event._id as ObjectId).toString(),
       }))
     });
   } catch (error) {
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest) {
       success: true, 
       data: {
         ...event.toObject(),
-        _id: event._id.toString(),
+        _id: (event._id as ObjectId).toString(),
       }
     }, { status: 201 });
   } catch (error) {
